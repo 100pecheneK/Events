@@ -1,0 +1,54 @@
+{% extends 'events/base.html' %}{% load static %}
+{% block body %}
+    <body>
+    <div class="container-fluid main d-flex align-content-center justify-content-center">
+        <div class="row sub-main">
+
+            <div class="col-12 col-sm-5 col-lg-3 p-0">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container m-0 p-0">
+                            <nav class="row m-0 p-0">
+                                <div class="col d-flex p-0">
+                                    <div class="container">
+                                        <h1 class="text-center">Заметки</h1>
+                                    </div>
+                                </div>
+                            </nav>
+                            <div class="row mt-3 m-auto d-block">
+                                <form action="{% url 'accounts:login' %}" method="POST"
+                                      class="col-10 col-sm-10 m-auto  p-0">{% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="text" name="username" class="form-control" value="MishaForever"
+                                               autofocus="" required="" id="id_username" placeholder="Имя пользователя">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <!-- <label for="exampleInputPassword1">Пароль</label> -->
+                                        <input type="password" class="form-control" name="password" required=""
+                                               id="id_password" placeholder="Пароль">
+
+                                    </div>
+                                    <input type="submit"
+                                           class="create-event create-event-link border-0 btn create d-block m-auto"
+                                           value="Войти">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="w-100"></div>
+            <div class="col-12 col-sm-5 col-lg-3 p-0 justify-content-center">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <p class="text-center">У вас ещё нет аккаунта? <a href="{% url 'accounts:signup' %}">Зарегистрироваться</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+{% endblock body %}

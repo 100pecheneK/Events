@@ -1,0 +1,200 @@
+{% extends 'events/base.html' %}{% load static %}
+{% block modal %}
+    <!-- Modal event -->
+    <div class="modal fade" id="modalEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Создание заметки</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'event:create' %}" method="POST" id="formEvent">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="title" class="col-form-label">Заголовок</label>
+                            <input type="text" class="form-control" id="title" name="title">
+                        </div>
+                        <div class="form-group">
+                            <label for="text">Текст</label>
+                            <input type="text" class="form-control" id="text" name="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Категория</label>
+                            <select class="form-control" id="category" name="category">
+                                {% block category_select %}
+
+                                {% endblock category_select %}
+                            </select>
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="check" name="check">
+                            <label class="form-check-label" for="check">Пометить</label>
+                        </div>
+                        <button type="submit" class="create-event btn create" id="button">Создать</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal category -->
+    <div class="modal fade" id="modalCategory" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Создание категории</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Форма создания события -->
+                    <form action="{% url 'event:createCategory' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="categoryText">Категория</label>
+                            <input type="text" class="form-control" id="categoryText" name="title">
+                        </div>
+                        <button type="submit" class="create create-event btn"
+                                id="button">Создать
+                        </button>
+                        <a href="" class="delete-event"><i class="fas fa-times"></i></a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock modal %}
+{% block main %}
+
+    <nav class="row m-0 p-0">
+        <div class="col d-flex p-0">
+            <div class="d-flex mr-auto">
+                {% if request.user.is_authenticated %}
+                    <button type="button"
+                            class="create-event create-event-link rounded-circle border-0 btn create"
+                            data-toggle="modal"
+                            data-target="#modalEvent" data-no="no">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="dropdown ml-2">
+                        <a class="create category btn border-0 dropdown-toggle" href="#"
+                           role="button"
+                           id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            Категория
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <button type="button"
+                                    class="create-category btn btn-primary dropdown-item"
+                                    data-toggle="modal" data-target="#modalCategory">
+                                Категория <i class="fas fa-edit"></i>
+                            </button>
+                            {% block category %}
+
+                            {% endblock category %}
+                        </div>
+                    </div>
+                    {% block categoryTitle %}
+                    {% endblock %}
+                {% else %}
+                    ///Авторизируйтесь
+                {% endif %}
+            </div>
+            <div>
+                {% if request.user.is_authenticated %}
+                    {# Выход#}
+                    <a href="{% url 'accounts:logout' %}"
+                       class="create-event create-event-link rounded-circle border-0 btn create">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                {% else %}
+                    {# reg #}
+                    <a href="{% url 'accounts:signup' %}"
+                       class="create-event create-event-link rounded-circle border-0 btn create">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="row mt-3 scroll-container">
+        {% block events %}
+        {% endblock events %}
+    </div>
+
+{% endblock main %}
+{% block scripts %}
+    <script>
+        $('form').find('input').attr('autocomplete', 'off');
+        $('#modalEvent').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('title');
+            var recipient2 = button.data('text');
+            var recipient3 = button.data('category');
+            var recipient4 = button.data('check');
+            var id = button.data('idevent');
+            var no = button.data('no')
+            // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this);
+            if (no == 'yes') {
+                modal.find('.modal-body form').attr('action', "/editEvents/" + id);
+                modal.find('.modal-title').text('Редактирование ' + recipient);
+                modal.find('.modal-body #title').val(recipient);
+                modal.find('.modal-body #text').val(recipient2);
+                modal.find('#button').text('Сохранить');
+            } else {
+                modal.find('.modal-body form').attr('action', "/createEvents");
+                modal.find('.modal-title').text('Создание');
+                modal.find('.modal-body #title').val('');
+                modal.find('.modal-body #text').val('');
+                modal.find('#button').text('Создать');
+            }
+
+
+            if (recipient3) {
+                modal.find('.modal-body #category').val(recipient3);
+            }
+            // modal.find('.modal-body #check').val(recipient4)
+
+            modal.find('.modal-body #check').prop('checked', recipient4);
+
+            // modal.find('.modal-body #check').attr('checked',true)
+
+
+        })
+        $('#modalCategory').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('text')
+            var id = button.data('idcat')
+            // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            if (recipient) {
+                modal.find('.modal-title').text('Редактирование ' + recipient);
+                modal.find('#button').text('Сохранить');
+
+                modal.find('.modal-body a').attr('href', '/deleteCategory/' + id);
+                modal.find('.modal-body form').attr('action', "/editCategory/" + id);
+
+            } else {
+                modal.find('.modal-body form').attr('action', "/createCategory");
+                modal.find('.modal-title').text('Создание');
+                modal.find('.modal-body #title').val('');
+                modal.find('#button').text('Создать');
+            }
+            modal.find('.modal-body #categoryText').val(recipient);
+
+
+        })
+    </script>
+{% endblock scripts %}

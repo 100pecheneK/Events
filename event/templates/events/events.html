@@ -1,0 +1,47 @@
+{% extends 'events/main.html' %}
+{% block category_select %}
+    {% for cat in category %}
+        <option value="{{ cat.id }}" {% if cat.id == 1 %}selected{% endif %}>{{ cat.title }}</option>
+
+    {% endfor %}
+{% endblock category_select %}
+{% block category %}
+    <a class="dropdown-item" href="{% url 'event:events' %}">Все категории</a>
+    {% for cat in category %}
+        <div class="dropdown-item cat d-flex justify-content-between align-items-center">
+            <a href="{% url 'event:eventsCat' cat.id %}">{{ cat.title }}</a>
+            <a href="#" class="change-event" data-toggle="modal"
+               data-target="#modalCategory" data-text="{{ cat.title }}" data-idcat="{{ cat.id }}"><i
+                    class="fas fa-cog"></i></a>
+        </div>
+    {% endfor %}
+
+
+{% endblock category %}
+{% block events %}
+    {% for event in events %}
+        <div class="col-12 border-top">
+            <div class="d-flex align-items-center">
+                {% if event.check %}
+                    <i class="fas fa-circle"></i>
+                {% endif %}
+                <div
+                        class=" ml-2 pass w-100 event-head d-flex justify-content-between align-items-center">
+                    <a href="#" class="link" data-toggle="modal" data-target="#modalEvent"
+                       data-title="{{ event.title }}" data-text="{{ event.text }}"
+                       data-category="{{ event.category.id }}" data-check="{{ event.check }}"
+                       data-idevent="{{ event.id }}" data-no="yes">
+                        <h2>{{ event.title }}</h2>
+                    </a><a href="{% url 'event:delete' event.id %}" class=""><i class="delete-event fas fa-times"></i></a>
+                </div>
+            </div>
+            <p>{{ event.text }}</p>
+            {#            <em class="d-block text-right">Ср 20:10, 2 октября 2019 г.</em>#}
+            <em class="d-block text-right">{{ event.date }}</em>
+        </div>
+    {% endfor %}
+
+{% endblock events %}
+{% block categoryTitle %}
+<h4 class="ml-2">{{ categorySingle.title }}</h4>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="{% static 'events/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'events/fonts/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'events/css/main.css' %}">
+</head>
+{% block body %}
+    <body>
+
+    {% block modal %}
+    {% endblock modal %}
+    <div class="container-fluid main d-flex align-content-center justify-content-center">
+        <div class="row sub-main">
+
+            <div class="col-12 col-md-8 col-lg-6 p-0">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container m-0 p-0">
+                            {% block main %}
+                            {% endblock main %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="{% static 'events/js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'events/js/popper.min.js' %}"></script>
+    <script src="{% static 'events/js/bootstrap.min.js' %}"></script>
+    {% block scripts %}
+
+    {% endblock scripts %}
+    </body>
+
+
+{% endblock %}
+</html>

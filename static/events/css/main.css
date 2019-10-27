@@ -1,0 +1,162 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #ffffff;
+    height: 100vh;
+}
+
+.card {
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+}
+
+.main {
+    height: 100vh;
+}
+
+.sub-main {
+    align-content: center;
+    justify-content: center;
+    width: 100vw;
+}
+
+.create {
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.create:hover {
+    transition: 0.2s;
+    color: white;
+}
+
+.create-event-link {
+    padding-left: 11px;
+    padding-right: 11px;
+}
+
+.fa-circle {
+    color: #ff0066;
+}
+
+.create-event {
+    background-color: #02dac6;
+    color: black;
+}
+
+.create-event i {
+    color: black;
+    transition: 0.2s;
+}
+
+.create-event:hover i {
+    color: white;
+}
+
+.category {
+    color: white;
+    background-color: #006776;
+}
+
+.create-category a {
+    color: black;
+}
+
+.create-category:hover,
+.create-category:hover a {
+    color: #006776;
+}
+
+.cat a {
+    color: black;
+    text-decoration: none;
+}
+
+.cat i {
+    color: #9e9e9e;
+    transition: 0.4s;
+}
+
+.cat i:hover {
+    color: #006776;
+    transform: rotate(360deg)
+}
+
+.scroll-container {
+    display: block;
+    height: 28em;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.delete-event {
+    color: #585858;
+    transition: 0.4s;
+}
+
+.delete-event:hover {
+    color: red;
+    transform: rotate(180deg);
+}
+
+.pass .link {
+    color: black;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.6s;
+}
+
+.pass .link:before {
+    content: "";
+    width: 0;
+    height: 0.2em;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: black;
+    transition: all 0.3s;
+}
+
+.pass .link:hover:before {
+    width: 100%;
+    left: 0;
+    background: black;
+}
+
+em {
+    color: #585858;
+}
+
+/* bootstrap */
+.btn:focus,
+.btn.focus {
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+p {
+    margin-bottom: 0;
+}
+.form-control:focus{
+    border-color: rgb(153, 153, 153);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+@media screen and (max-width: 576px) {
+    .container-fluid {
+        height: 100vh;
+    }
+
+    .sub-main {
+        align-content: flex-start;
+    }
+
+    .scroll-container {
+        height: 100%;
+    }
+
+    .card {
+        box-shadow: none;
+        border: none;
+    }
+}
+
+
+/* Preloader */

@@ -1,7 +1,7 @@
 from django.db import models
 
 from datetime import datetime
-# Create your models here.
+
 
 class Category(models.Model):
     title = models.CharField(max_length=100)
@@ -13,6 +13,6 @@ class Category(models.Model):
 class Events(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
-    check = models.IntegerField(default=0)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    check = models.CharField(max_length=3, default='off')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True)
     date = models.DateTimeField(default=datetime.now())

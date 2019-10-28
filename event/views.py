@@ -13,18 +13,17 @@ def view(request, cat_id=0):
     context = dict()
     if (cat_id):
         events = Events.objects.filter(category_id=int(cat_id)).order_by('-date')
-        categorySingle = Category.objects.get(id=cat_id)
+        category_single = Category.objects.get(id=cat_id)
         context = {
-            'categorySingle': categorySingle,
+            'categorySingle': category_single,
         }
     else:
         events = Events.objects.all().order_by('-date')
-    category = Category.objects.all()
 
-
+    editableCategories = Category.objects.all()
 
     context['events'] = events
-    context['category'] = category
+    context['editableCategories'] = editableCategories
 
     return render(request, 'events/events.html', context)
 
@@ -33,24 +32,19 @@ def view(request, cat_id=0):
 
 
 def create(request):
-    category = int(request.POST['category'])
-    cat = Category.objects.get(id=category)
+    chosenCategory = int(request.POST['category'])
 
+    categoryObject = Category.objects.get(id=chosenCategory)
     try:
         check = request.POST['check']
-        check = 1
     except:
-        check = 0
+        check = 'off'
 
-    cat.events_set.create(
+    categoryObject.events_set.create(
         title=request.POST['title'],
         text=request.POST['text'],
         check=check
     )
-    # category_id = request.POST['category']
-    # category = Category.objects.get(id=int(category_id))
-    #
-    # category.events_set.
 
     return HttpResponseRedirect(reverse('event:events'))
     # return HttpResponse(request.POST['category'])
@@ -63,9 +57,9 @@ def edit(request, even_id):
     event.category_id = int(request.POST['category'])
     try:
         check = request.POST['check']
-        event.heck = 1
+        event.check = 'on'
     except:
-        event.check = 0
+        event.check = 'off'
     event.date = datetime.now()
     event.save()
     # category = Category.objects.get(events_id=even_id)

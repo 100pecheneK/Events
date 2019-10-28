@@ -24,7 +24,7 @@ SECRET_KEY = 'cs&rvhm_s5%fd*&csxwp2ehuv4-z($*h_91%b_*2%^p7=zp-ky'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.100', '127.0.0.1']
 
 INSTALLED_APPS = [
     # Джанго

@@ -1,29 +1,33 @@
 {% extends 'events/main.html' %}
 {% block category_select %}
-    {% for cat in category %}
+    {% for cat in editableCategories %}
         <option value="{{ cat.id }}" {% if cat.id == 1 %}selected{% endif %}>{{ cat.title }}</option>
 
     {% endfor %}
 {% endblock category_select %}
 {% block category %}
     <a class="dropdown-item" href="{% url 'event:events' %}">Все категории</a>
-    {% for cat in category %}
+    {% for cat in editableCategories %}
+        <a class="no-underline-a" href="{% url 'event:eventsCat' cat.id %}">
         <div class="dropdown-item cat d-flex justify-content-between align-items-center">
-            <a href="{% url 'event:eventsCat' cat.id %}">{{ cat.title }}</a>
-            <a href="#" class="change-event" data-toggle="modal"
+            {{ cat.title }}
+            <object>
+                <a href="#" class="change-event" data-toggle="modal"
                data-target="#modalCategory" data-text="{{ cat.title }}" data-idcat="{{ cat.id }}"><i
                     class="fas fa-cog"></i></a>
+            </object>
         </div>
+        </a>
+
     {% endfor %}
-
-
 {% endblock category %}
 {% block events %}
     {% for event in events %}
         <div class="col-12 border-top">
             <div class="d-flex align-items-center">
-                {% if event.check %}
-                    <i class="fas fa-circle"></i>
+                {% if event.check == 'on' %}
+{#                    <i class="fas fa-circle"></i>#}
+                    <i class="fas fa-square"></i>
                 {% endif %}
                 <div
                         class=" ml-2 pass w-100 event-head d-flex justify-content-between align-items-center">
@@ -32,7 +36,8 @@
                        data-category="{{ event.category.id }}" data-check="{{ event.check }}"
                        data-idevent="{{ event.id }}" data-no="yes">
                         <h2>{{ event.title }}</h2>
-                    </a><a href="{% url 'event:delete' event.id %}" class=""><i class="delete-event fas fa-times"></i></a>
+                    </a><a href="{% url 'event:delete' event.id %}" class=""><i
+                        class="delete-event fas fa-times"></i></a>
                 </div>
             </div>
             <p>{{ event.text }}</p>
@@ -43,5 +48,5 @@
 
 {% endblock events %}
 {% block categoryTitle %}
-<h4 class="ml-2">{{ categorySingle.title }}</h4>
+    <h4 class="ml-2">{{ categorySingle.title }}</h4>
 {% endblock %}

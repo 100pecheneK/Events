@@ -6,12 +6,12 @@ from . import views
 app_name = 'event'
 urlpatterns = [
     path('', views.view, name='events'),
-    path('category/<int:cat_id>', views.view, name='eventsCat'),
+    path('category/<int:categoryId>', views.view, name='eventsCat'),
     path('createEvents', views.create, name='create'),
-    path('editEvents/<int:even_id>', views.edit, name='edit'),
-    path('deleteEvents/<int:even_id>', views.delete, name='delete'),
+    path('editEvents/<int:eventId>', views.edit, name='edit'),
+    path('deleteEvents/<int:eventId>', views.delete, name='delete'),
 
     path('createCategory', views.category_create, name='createCategory'),
-    path('editCategory/<int:cat_id>', views.category_edit, name='editCategory'),
-    path('deleteCategory/<int:cat_id>', views.category_delete, name='deleteCategory'),
+    path('editCategory/<int:categoryId>', views.category_edit, name='editCategory'),
+    path('deleteCategory/<int:categoryId>', views.category_delete, name='deleteCategory'),
 ]

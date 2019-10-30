@@ -1,13 +1,13 @@
 {% extends 'events/main.html' %}
 {% block category_select %}
-    {% for cat in editableCategories %}
+    {% for cat in categories %}
         <option value="{{ cat.id }}" {% if cat.id == 1 %}selected{% endif %}>{{ cat.title }}</option>
 
     {% endfor %}
 {% endblock category_select %}
 {% block category %}
     <a class="dropdown-item" href="{% url 'event:events' %}">Все категории</a>
-    {% for cat in editableCategories %}
+    {% for cat in categories %}
         <a class="no-underline-a" href="{% url 'event:eventsCat' cat.id %}">
         <div class="dropdown-item cat d-flex justify-content-between align-items-center">
             {{ cat.title }}
@@ -48,5 +48,5 @@
 
 {% endblock events %}
 {% block categoryTitle %}
-    <h4 class="ml-2">{{ categorySingle.title }}</h4>
+    <h4 class="ml-2">{{ category.title }}</h4>
 {% endblock %}

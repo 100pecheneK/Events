@@ -24,11 +24,22 @@
                         </div>
                         <div class="form-group">
                             <label for="category">Категория</label>
-                            <select class="form-control" id="category" name="category" required>
-                                {% block category_select %}
+                            <div class="row">
 
-                                {% endblock category_select %}
-                            </select>
+
+                                <div class="col">
+                                    <input type="text" class="form-control" id="category-title"
+                                           name="category" required>
+                                </div>
+                                <div class="col">
+                                    <select class="form-control" id="category">
+                                        {% block category_select %}
+
+                                        {% endblock category_select %}
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="form-group">
                             <label for="cbx" class="label-cbx">
@@ -64,13 +75,13 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="categoryText">Категория</label>
-                            <input type="text" class="form-control" id="categoryText" name="title" required>
+                            <input type="text" class="form-control" id="categoryText" name="category" required>
                         </div>
                         <div class="d-flex justify-content-between">
                             <button type="submit" class="create create-event btn"
                                     id="button">Создать
                             </button>
-                            <a href="" class="delete-category d-flex align-items-center"><i
+                            <a href="" id="delete-category" class="delete-category d-flex align-items-center"><i
                                     class="fas fa-trash"></i></a>
                         </div>
                     </form>
@@ -85,52 +96,44 @@
     <nav class="row m-0 p-0">
         <div class="col d-flex p-0">
             <div class="d-flex mr-auto">
-                {% if request.user.is_authenticated %}
-                    <button type="button"
-                            class="create-event create-event-link rounded-circle border-0 btn create"
-                            data-toggle="modal"
-                            data-target="#modalEvent" data-no="no">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                    <div class="dropdown ml-2">
-                        <a class="create category btn border-0" href="#"
-                           role="button"
-                           id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">
-                            <i class="fas fa-list-ul"></i>
-                        </a>
+                <button type="button"
+                        class="create-event create-event-link rounded-circle border-0 btn create"
+                        data-toggle="modal"
+                        data-target="#modalEvent" rel="tooltip" data-no="no" data-placement="top" title="Создать"
+                        data-delay='{"show":"400", "hide":"100"}'>
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="dropdown ml-2">
+                    <a class="create category btn border-0" href="#"
+                       role="button"
+                       id="dropdownMenuLink" rel="tooltip" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false" data-placement="top" title="Категории"
+                       data-delay='{"show":"400", "hide":"100"}'>
+                        <i class="fas fa-list-ul"></i>
+                    </a>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <button type="button"
-                                    class="create-category btn btn-primary dropdown-item"
-                                    data-toggle="modal" data-target="#modalCategory">
-                                Категория <i class="fas fa-edit"></i>
-                            </button>
-                            {% block category %}
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <button type="button"
+                                class="create-category btn btn-primary dropdown-item"
+                                data-toggle="modal" data-target="#modalCategory">
+                            Категория <i class="fas fa-edit"></i>
+                        </button>
+                        {% block category %}
 
-                            {% endblock category %}
-                        </div>
+                        {% endblock category %}
                     </div>
-                    {% block categoryTitle %}
-                    {% endblock %}
-                {% else %}
-                    /// TODO сделать что то классное Авторизируйтесь
-                {% endif %}
+                </div>
+                {% block categoryTitle %}
+                {% endblock %}
             </div>
             <div>
-                {% if request.user.is_authenticated %}
-                    {# Выход#}
-                    <a href="{% url 'accounts:logout' %}"
-                       class="create-event create-event-link rounded-circle border-0 btn create">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
-                {% else %}
-                    {# reg #}
-                    <a href="{% url 'accounts:signup' %}"
-                       class="create-event create-event-link rounded-circle border-0 btn create">
-                        <i class="fas fa-sign-in-alt"></i>
-                    </a>
-                {% endif %}
+                {# Выход#}
+                <a href="{% url 'accounts:logout' %}"
+                   class="create-event create-event-link rounded-circle border-0 btn create" rel="tooltip"
+                   data-placement="top" title="Выход" data-delay='{"show":"400", "hide":"100"}'>
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+
             </div>
         </div>
     </nav>
@@ -144,25 +147,40 @@
 {% endblock main %}
 {% block scripts %}
     <script>
+        $('#delete-category').click(function () {
+            alert("При удалении категории, удалятся все связанные заметки! Вы уверены?");
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[rel="tooltip"]').tooltip();
+        });
+    </script>
+    <script>
+        $('#category').on('change', function () {
+            let category = $('#category option:selected').text();
+            $('#category-title').val(category);
+        });
+    </script>
+    <script>
         $('form').find('input').attr('autocomplete', 'off');
         $('#modalEvent').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); // Button that triggered the modal
-            var recipient = button.data('title');
-            var recipient2 = button.data('text');
-            var recipient3 = button.data('category');
-            var recipient4 = button.data('check');
-            var id = button.data('idevent');
+            var eventTitle = button.data('title');
+            var eventText = button.data('text');
+            var categoryId = button.data('category-id');
+            var categoryTitle = button.data('category-title');
+            var check = button.data('check');
+            var eventId = button.data('idevent');
             var no = button.data('no');
-            // Extract info from data-* attributes
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this);
+
             if (no == 'yes') {
-                modal.find('.modal-body form').attr('action', "/editEvents/" + id);
-                modal.find('.modal-title').text('Редактирование ' + recipient);
-                modal.find('.modal-body #title').val(recipient);
-                modal.find('.modal-body #text').val(recipient2);
-                if (recipient4 == 'on') {
+                modal.find('.modal-body form').attr('action', "/editEvents/" + eventId);
+                modal.find('.modal-title').text('Редактирование ' + eventTitle);
+                modal.find('.modal-body #title').val(eventTitle);
+                modal.find('.modal-body #text').val(eventText);
+                if (check == 'on') {
                     modal.find('.modal-body #cbx').attr('checked', 'true');
                 }
                 modal.find('#button').text('Сохранить');
@@ -173,43 +191,33 @@
                 modal.find('.modal-body #text').val('');
                 modal.find('#button').text('Создать');
             }
-
-
-            if (recipient3) {
-                modal.find('.modal-body #category').val(recipient3);
+            if (categoryId) {
+                modal.find('.modal-body #category').val(categoryId);
+                modal.find('.modal-body #category-title').val(categoryTitle);
+            } else {
+                let category = $('#category option:selected').text();
+                modal.find('.modal-body #category-title').val(category);
             }
-            // modal.find('.modal-body #check').val(recipient4)
-
-            modal.find('.modal-body #check').prop('checked', recipient4);
-
-            // modal.find('.modal-body #check').attr('checked',true)
-
-
-        })
+            modal.find('.modal-body #check').prop('checked', check);
+        });
         $('#modalCategory').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var recipient = button.data('text')
-            var id = button.data('idcat')
-            // Extract info from data-* attributes
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            var modal = $(this)
-            if (recipient) {
-                modal.find('.modal-title').text('Редактирование ' + recipient);
+            var button = $(event.relatedTarget);
+            var textCategory = button.data('text');
+            var categoryId = button.data('idcat');
+            var modal = $(this);
+            if (textCategory) {
+                modal.find('.modal-title').text('Редактирование ' + textCategory);
                 modal.find('#button').text('Сохранить');
-
-                modal.find('.modal-body a').attr('href', '/deleteCategory/' + id);
-                modal.find('.modal-body form').attr('action', "/editCategory/" + id);
-
+                modal.find('.modal-body a').attr('href', '/deleteCategory/' + categoryId);
+                modal.find('.modal-body form').attr('action', "/editCategory/" + categoryId);
             } else {
                 modal.find('.modal-body form').attr('action', "/createCategory");
                 modal.find('.modal-title').text('Создание');
                 modal.find('.modal-body #title').val('');
                 modal.find('#button').text('Создать');
+                modal.find('.fa-trash').hide();
             }
-            modal.find('.modal-body #categoryText').val(recipient);
-
-
-        })
+            modal.find('.modal-body #categoryText').val(textCategory);
+        });
     </script>
 {% endblock scripts %}

@@ -3,11 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="35d6df47-838a-4231-8aa7-40cce2695f8e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/tests.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/event/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/event/static/events/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/event/static/events/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/event/templates/events/events.html" beforeDir="false" afterPath="$PROJECT_DIR$/event/templates/events/events.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/event/templates/events/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/event/templates/events/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/event/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/event/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/event/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/event/views/event.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/events/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/events/css/main.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,11 +80,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/event/views" />
       <recent name="$PROJECT_DIR$/accounts" />
       <recent name="$PROJECT_DIR$/events/static/events" />
       <recent name="$PROJECT_DIR$/events" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/events/templates/events" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -153,6 +157,9 @@
       <workItem from="1572261646211" duration="7239000" />
       <workItem from="1572408835121" duration="2327000" />
       <workItem from="1572414268694" duration="3391000" />
+      <workItem from="1572424683040" duration="2081000" />
+      <workItem from="1572430991261" duration="158000" />
+      <workItem from="1572433007007" duration="5387000" />
     </task>
     <servers />
   </component>

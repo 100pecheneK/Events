@@ -26,14 +26,13 @@
         <div class="col-12 border-top">
             <div class="d-flex align-items-center">
                 {% if event.check == 'on' %}
-{#                    <i class="fas fa-circle"></i>#}
-                    <i class="fas fa-square"></i>
+                    <i class="mr-2 fas fa-square"></i>
                 {% endif %}
                 <div
-                        class=" ml-2 pass w-100 event-head d-flex justify-content-between align-items-center">
+                        class=" pass w-100 event-head d-flex justify-content-between align-items-center">
                     <a href="#" class="link" data-toggle="modal" data-target="#modalEvent"
                        data-title="{{ event.title }}" data-text="{{ event.text }}"
-                       data-category="{{ event.category.id }}" data-check="{{ event.check }}"
+                       data-category-id="{{ event.category.id }}" data-category-title="{{ event.category.title }}" data-check="{{ event.check }}"
                        data-idevent="{{ event.id }}" data-no="yes">
                         <h2>{{ event.title }}</h2>
                     </a><a href="{% url 'event:delete' event.id %}" class=""><i

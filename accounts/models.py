@@ -10,3 +10,7 @@ class Account(models.Model):
     def save(self, **kwargs):
         super(Account, self).save(**kwargs)
         Category.objects.create(user=Account, title='Без категории')
+
+    class Meta:
+        verbose_name = 'Аккаунт'
+        verbose_name_plural = 'Аккаунты'

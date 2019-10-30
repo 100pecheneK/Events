@@ -3,26 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="35d6df47-838a-4231-8aa7-40cce2695f8e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/forms.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/tests.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/event/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/event/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event/templates/events/events.html" beforeDir="false" afterPath="$PROJECT_DIR$/event/templates/events/events.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/event/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/event/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/event/tests.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -167,7 +152,7 @@
       <workItem from="1572157557004" duration="4424000" />
       <workItem from="1572261646211" duration="7239000" />
       <workItem from="1572408835121" duration="2327000" />
-      <workItem from="1572414268694" duration="2940000" />
+      <workItem from="1572414268694" duration="3391000" />
     </task>
     <servers />
   </component>

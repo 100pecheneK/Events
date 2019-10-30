@@ -9,6 +9,10 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Катергория'
+        verbose_name_plural = 'Катергории'
+
 
 class Events(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
@@ -17,3 +21,7 @@ class Events(models.Model):
     check = models.CharField(max_length=3, default='off')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True)
     date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Заметка'
+        verbose_name_plural = 'Заметки'

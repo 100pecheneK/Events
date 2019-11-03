@@ -138,6 +138,7 @@
         </div>
     </nav>
     {% if request.user.is_authenticated %}
+
         <div class="row mt-3 scroll-container">
             {% block events %}
             {% endblock events %}
@@ -147,8 +148,11 @@
 {% endblock main %}
 {% block scripts %}
     <script>
+        $('.toast').toast('show');
+    </script>
+    <script>
         $('#delete-category').click(function () {
-            alert("При удалении категории, удалятся все связанные заметки! Вы уверены?");
+            alert("При удалении категории исчезнут все связанные заметки. Вы уверены?");
         });
     </script>
     <script>
@@ -210,6 +214,7 @@
                 modal.find('#button').text('Сохранить');
                 modal.find('.modal-body a').attr('href', '/deleteCategory/' + categoryId);
                 modal.find('.modal-body form').attr('action', "/editCategory/" + categoryId);
+                modal.find('.fa-trash').show();
             } else {
                 modal.find('.modal-body form').attr('action', "/createCategory");
                 modal.find('.modal-title').text('Создание');

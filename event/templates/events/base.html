@@ -10,13 +10,15 @@
 
     <link rel="stylesheet" href="{% static 'events/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'events/fonts/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'events/fonts/fonts/fonts.css' %}">
     <link rel="stylesheet" href="{% static 'events/css/main.css' %}">
 </head>
-{% block body %}
+
     <body>
 
     {% block modal %}
     {% endblock modal %}
+    {% block body %}
     <div class="container-fluid main d-flex align-content-center justify-content-center">
         <div class="row sub-main">
 
@@ -24,6 +26,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="container-fluid m-0 p-0">
+
                             {% block main %}
                             {% endblock main %}
                         </div>
@@ -33,6 +36,27 @@
 
         </div>
     </div>
+{% endblock body %}
+    {% if messages %}
+            <div style="position: absolute; top: 0; right: 0;">
+                {% for message in messages %}
+                    <div class="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true"
+                         data-delay="5000">
+                        <div class="toast-header">
+                            <strong class="mr-auto">Ошибка</strong>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast"
+                                    aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            <p>{{ message }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+    {% endif %}
+
     <script src="{% static 'events/js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'events/js/popper.min.js' %}"></script>
     <script src="{% static 'events/js/bootstrap.min.js' %}"></script>
@@ -42,5 +66,5 @@
     </body>
 
 
-{% endblock %}
+
 </html>

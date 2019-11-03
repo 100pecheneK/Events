@@ -1,54 +1,60 @@
 {% extends 'events/base.html' %}{% load static %}
 {% block body %}
-    <body>
-    <div class="container-fluid main d-flex align-content-center justify-content-center">
+    <div class="container main d-flex align-content-center justify-content-center">
         <div class="row sub-main">
-
-            <div class="col-12 col-sm-5 col-lg-3 p-0">
+            <div class="col-12 col-sm-6 col-lg-3 p-0">
                 <div class="card">
                     <div class="card-body">
                         <div class="container m-0 p-0">
                             <nav class="row m-0 p-0">
                                 <div class="col d-flex p-0">
                                     <div class="container">
-                                        <h1 class="text-center">Заметки</h1>
+                                        <h1 class="notes-logo text-center">Notes</h1>
                                     </div>
                                 </div>
                             </nav>
                             <div class="row mt-3 m-auto d-block">
-                                <form action="{% url 'accounts:login' %}" method="POST"
-                                      class="col-10 col-sm-10 m-auto  p-0">{% csrf_token %}
+                                <form class="col-10 col-sm-10 m-auto p-0" method='POST'
+                                      action="{% url 'accounts:login' %}">
+                                    {% csrf_token %}
+                                    {% if form.username.errors %}{% endif %}
                                     <div class="form-group">
-                                        <input type="text" name="username" class="form-control"
-                                               autofocus="" required id="id_username" placeholder="Имя пользователя">
-
+                                        {{ form.username }}
+                                        {% if form.username.errors %}
+                                            <div class="invalid-feedback">
+                                                {{ form.username.errors }}
+                                            </div>
+                                        {% endif %}
                                     </div>
                                     <div class="form-group">
-                                        <!-- <label for="exampleInputPassword1">Пароль</label> -->
-                                        <input type="password" class="form-control" name="password" required
-                                               id="id_password" placeholder="Пароль">
-
+                                        {{ form.password }}
+                                        {% if form.password.errors %}
+                                            <div class="invalid-feedback">
+                                                {{ form.password.errors }}
+                                            </div>
+                                        {% endif %}
                                     </div>
-                                    <input type="submit"
-                                           class="create-event create-event-link border-0 btn create d-block m-auto"
-                                           value="Войти">
+                                    <button type="submit"
+                                            class="create-event create-event-link border-0 btn create d-block m-auto">
+                                        Войти
+                                    </button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="w-100"></div>
-            <div class="col-12 col-sm-5 col-lg-3 p-0 justify-content-center">
+            <div class="col-12 col-sm-6 col-lg-3 p-0 justify-content-center">
                 <div class="card mt-3">
                     <div class="card-body">
-                        <p class="text-center">У вас ещё нет аккаунта? <a href="{% url 'accounts:signup' %}">Зарегистрироваться</a></p>
+                        <p class="text-center">У вас ещё нет аккаунта? <a href="{% url 'accounts:register' %}">Зарегистрироваться</a>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    </body>
-{% endblock body %}
+{% endblock %}
+{% block scripts %}
+{% endblock %}

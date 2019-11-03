@@ -1,35 +1,60 @@
+from django.contrib.auth import authenticate, login, logout
+from django.core.exceptions import ValidationError
+from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic import FormView
-from django.contrib.auth import login
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.forms import UserCreationForm
-
+from .forms import RegisterForm, LoginForm
 from django.http import HttpResponseRedirect
-from django.views.generic.base import View
-from django.contrib.auth import logout
+from django.contrib.auth.models import User
 
 
-class Signup(FormView):
-    form_class = UserCreationForm
-    success_url = "/accounts/login/"
-    template_name = 'accounts/signup.html'
+class RegisterView(FormView):
+    form_class = RegisterForm
+    page_title = 'Register'
+    template_name = 'accounts/register.html'
 
-    def form_valid(self, form):
-        form.save()
-        return super(Signup, self).form_valid(form)
-
-
-class Login(FormView):
-    form_class = AuthenticationForm
-    template_name = 'accounts/login.html'
-    success_url = '/'
-
-    def form_valid(self, form):
-        self.user = form.get_user()
-        login(self.request, self.user)
-        return super(Login, self).form_valid(form)
-
-
-class Logout(View):
     def get(self, request):
-        logout(request)
-        return HttpResponseRedirect("/")
+        form = RegisterForm()
+        return super(RegisterView, self).get(request, form=form)
+
+    def post(self, request, *args, **kwargs):
+        form = RegisterForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+            new_profile = User.objects.create_user(
+                username=data['username'],
+                password=data['password'],
+            )
+            if new_profile:
+                return HttpResponseRedirect(reverse('accounts:login'))
+
+        return super(RegisterView, self).get(request, form=form)
+
+
+class LoginView(FormView):
+    form_class = LoginForm
+    page_title = 'Login'
+    template_name = 'accounts/login.html'
+
+    def get(self, request):
+        form = LoginForm()
+        return super(LoginView, self).get(request, form=form)
+
+    def post(self, request, *args, **kwargs):
+        form = LoginForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+            user = authenticate(username=data['username'], password=data['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('event:events'))
+
+        return super(LoginView, self).get(request, form=form)
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('accounts:login'))

@@ -1,0 +1,24 @@
+@font-face {
+    font-family: "Billabong";
+    src: url("Billabong/Billabong.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+@font-face {
+    font-family: "Roboto";
+    src: url("Roboto/Roboto-Regular.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+@font-face {
+    font-family: "RobotoMedium";
+    src: url("Roboto/Roboto-Medium.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+@font-face {
+    font-family: "RobotoLightItalic";
+    src: url("Roboto/Roboto-LightItalic.ttf");
+    font-style: normal;
+    font-weight: normal;
+}

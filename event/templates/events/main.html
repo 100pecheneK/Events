@@ -114,7 +114,7 @@
 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <button type="button"
-                                class="create-category btn btn-primary dropdown-item"
+                                class="dropdown-item btn create-category"
                                 data-toggle="modal" data-target="#modalCategory">
                             Категория <i class="fas fa-edit"></i>
                         </button>
@@ -139,7 +139,7 @@
     </nav>
     {% if request.user.is_authenticated %}
 
-        <div class="row mt-3 scroll-container">
+        <div class="row mt-3 scroll-container" id="style-2">
             {% block events %}
             {% endblock events %}
         </div>
@@ -155,11 +155,11 @@
             alert("При удалении категории исчезнут все связанные заметки. Вы уверены?");
         });
     </script>
-    <script>
-        $(function () {
-            $('[rel="tooltip"]').tooltip();
-        });
-    </script>
+{#    <script>#}
+{#        $(function () {#}
+{#            $('[rel="tooltip"]').tooltip();#}
+{#        });#}
+{#    </script>#}
     <script>
         $('#category').on('change', function () {
             let category = $('#category option:selected').text();
@@ -188,12 +188,16 @@
                     modal.find('.modal-body #cbx').attr('checked', 'true');
                 }
                 modal.find('#button').text('Сохранить');
+                modal.find('#category').show();
             } else {
                 modal.find('.modal-body form').attr('action', "/createEvents");
                 modal.find('.modal-title').text('Создание');
                 modal.find('.modal-body #title').val('');
                 modal.find('.modal-body #text').val('');
                 modal.find('#button').text('Создать');
+                if (!$('#category').val()) {
+                    modal.find('#category').hide();
+                }
             }
             if (categoryId) {
                 modal.find('.modal-body #category').val(categoryId);

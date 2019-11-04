@@ -10,6 +10,7 @@ h2 {
     font-family: RobotoMedium, Helvetica, Arial, sans-serif;
     font-size: 1.5em;
 }
+
 em {
     font-family: RobotoLightItalic, Helvetica, Arial, sans-serif;
 }
@@ -17,13 +18,15 @@ em {
 .notes-logo {
     font-family: Billabong, Helvetica, Arial, sans-serif;
     font-size: 3.5em;
+    margin: 0;
 }
+
 .register-tooltip {
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: #999;
-    margin-bottom: 1em;
 }
+
 .card {
     box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
 }
@@ -40,11 +43,13 @@ em {
 
 .create {
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    background-color: #3897ef;
 }
 
 .create:hover {
     transition: 0.2s;
     color: white;
+    background-color: #3897eed1;
 }
 
 .create-event-link {
@@ -65,12 +70,13 @@ em {
 }
 
 .create-event {
-    background-color: #02dac6;
-    color: black;
+
+    color: white;
 }
 
 .create-event i {
-    color: black;
+    vertical-align: text-bottom;
+    color: white;
     transition: 0.2s;
 }
 
@@ -80,16 +86,20 @@ em {
 
 .category {
     color: black;
-    background-color: #02dac6;
 }
 
 .create-category a {
     color: black;
 }
 
+.category i {
+    color: white;
+    vertical-align: text-bottom;
+}
+
 .create-category:hover,
 .create-category:hover a {
-    color: #02dac6;
+    color: #3897ef;
 }
 
 .cat a {
@@ -115,7 +125,7 @@ em {
 .delete-category:hover {
     color: red;
 }
-
+/*Скролл*/
 .scroll-container {
     display: block;
     height: 28em;
@@ -123,6 +133,21 @@ em {
     scroll-behavior: smooth;
 }
 
+#style-2::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+#style-2::-webkit-scrollbar {
+    width: 10px;
+    background-color: #ffffff;
+}
+
+#style-2::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #716e71;
+}
+/* /Скролл*/
 .delete-event {
     color: #585858;
     transition: 0.4s;
@@ -192,7 +217,11 @@ p {
 .dropdown-item.active, .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #02dac6;
+    background-color: #3897ef;
+}
+
+.dropdown-menu .btn {
+    border-radius: 0;
 }
 
 /*@media screen and (max-width: 576px) {*/

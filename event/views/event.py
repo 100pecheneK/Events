@@ -12,7 +12,10 @@ def view(request, categoryId=0):
     context = dict()
     if (categoryId):
         events = Events.objects.filter(category_id=categoryId, user=request.user).order_by('-date')
-        category = Category.objects.get(id=categoryId, user=request.user)
+        try:
+            category = Category.objects.get(id=categoryId, user=request.user)
+        except Category.DoesNotExist:
+            return HttpResponseRedirect(reverse('event:events'))
         context['category'] = category
     else:
         events = Events.objects.filter(user=request.user).order_by('-date')

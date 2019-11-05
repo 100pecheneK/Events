@@ -223,19 +223,32 @@ p {
 .dropdown-menu .btn {
     border-radius: 0;
 }
+.alert-div {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.alert {
+    color: white;
+    background-color: #ef6363;
+}
 
 /*@media screen and (max-width: 576px) {*/
 @media screen and (max-width: 768px) {
     .container-fluid {
         height: 100vh;
     }
-
+    .alert-div{
+        top: unset;
+        bottom: 0;
+    }
     .sub-main {
         align-content: flex-start;
     }
 
     .scroll-container {
-        height: 100%;
+        height: unset;
+        overflow-y: unset;
     }
 
     .card {

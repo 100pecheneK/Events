@@ -22,11 +22,15 @@ def create(request):
 @login_required()
 def edit(request, categoryId):
     category = tools.get_category_or_false(request, Category, categoryId)
+    print(category)
+    print()
+    print()
     if category:
-        category.title = request.POST['title']
+        category.title = request.POST['category']
         category.save()
     else:
         messages.error(request, "Категория уже существует!")
+
 
     return HttpResponseRedirect(reverse('event:events'))
 

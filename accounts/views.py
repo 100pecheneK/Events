@@ -1,6 +1,4 @@
 from django.contrib.auth import authenticate, login, logout
-from django.core.exceptions import ValidationError
-from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import FormView
 from .forms import RegisterForm, LoginForm
@@ -46,7 +44,8 @@ class LoginView(FormView):
 
         if form.is_valid():
             data = form.cleaned_data
-            user = authenticate(username=data['username'], password=data['password'])
+            user = authenticate(
+                username=data['username'], password=data['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)

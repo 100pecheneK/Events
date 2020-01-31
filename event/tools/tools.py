@@ -25,7 +25,7 @@ def is_category_available(request, model):
 
 def get_category_or_false(request, model, categoryId):
     try:
-        category = model.objects.get(id=categoryId)
+        category = model.objects.get(id=categoryId, title=request.POST['category'])
         if request.POST['category'] == category.title:
             return False
     except:
